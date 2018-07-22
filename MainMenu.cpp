@@ -5,7 +5,7 @@
 MainMenu::MenuResult MainMenu::show(sf::RenderWindow &window) {
 	/* Load menu image from a file and construct sprite */
 	sf::Texture menu_texture;
-	menu_texture.loadFromFile("Images/menu.png");
+	menu_texture.loadFromFile("Images/main-menu.png");
 	sf::Sprite menu_sprite(menu_texture);
 
 	/* Set up clickable dimensions of menu items */
@@ -21,7 +21,7 @@ MainMenu::MenuResult MainMenu::show(sf::RenderWindow &window) {
 	exit_button.rect.height = 235;
 	exit_button.rect.left = 0;
 	exit_button.rect.width = 1023;
-	exit_button.action = PLAY;
+	exit_button.action = EXIT;
 
 	_menu_items.push_back(play_button);
 	_menu_items.push_back(exit_button);

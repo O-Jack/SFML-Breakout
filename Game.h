@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "SplashScreen.h"
 #include "MainMenu.h"
+#include "Paddle.h"
 
 /* Game class for state-driven implementation of Breakout */
 
@@ -27,6 +28,7 @@ private:
 	 */
 	static GameState _state;
 	static sf::RenderWindow _main_window;
+	static Paddle _paddle;
 
 	/* Static member functions:
 	 * Class functions, do not depend on instances (no this pointer, access using scope resolution).
