@@ -64,5 +64,5 @@ MainMenu::MenuResult MainMenu::click_handler(int x, int y) {
 	}
 
 	/* If click doesn't fall within any item dimensions, return NONE */
-	return MainMenu::NONE;
+	return NONE;
 }

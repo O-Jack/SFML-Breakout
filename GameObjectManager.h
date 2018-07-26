@@ -20,6 +20,7 @@ private:
 	/* Map containing pointers to game objects, keyed by object name */
 	std::unordered_map<std::string, VisibleGameObject *> _game_objects;
 
+	/* Deallocator functor (class acting as function) for freeing game objects */
 	struct GameObjectDeallocator {
 		void operator()(const std::pair<std::string, VisibleGameObject *> &p) {
 			delete p.second;

@@ -10,9 +10,11 @@ void Game::start()
 	/* Create main window with resolution of 1024x768 at 32bpp */
 	_main_window.create(sf::VideoMode(1024, 768, 32), "Breakout");
 
-	/* Initialize Paddle object */
-	_paddle.load("Images/paddle-basic.png");
-	_paddle.set_position(1024 / 2 - 45, 700);
+	/* Initialize Paddle object and add it to object manager */
+	Paddle *paddle = new Paddle();
+	paddle->load("Images/paddle-basic.png");
+	paddle->set_position(1024 / 2 - 45, 700);
+	_obj_manager.add("paddle", paddle);
 
 	/* Start by showing splash screen  */
 	_state = SPLASHSCREEN;
@@ -46,7 +48,7 @@ void Game::game_loop()
 			case PLAYING:
 				/* DEBUG: Clear screen with red and display it on window */
 				_main_window.clear(sf::Color(0, 0, 0, 255));
-				_paddle.draw(_main_window);
+				_obj_manager.draw_all(_main_window);
 				_main_window.display();
 
 				/* If window is closed (Closed event), switch to EXITING state */
@@ -93,4 +95,4 @@ void Game::show_main_menu()
 /* Manually instantiate and initialize static member variables outside of class */
 Game::GameState Game::_state = UNINITIALIZED;
 sf::RenderWindow Game::_main_window;
-Paddle Game::_paddle;
+GameObjectManager Game::_obj_manager;

@@ -9,4 +9,11 @@ class Paddle : public VisibleGameObject {
 public:
 	Paddle();
 	~Paddle();
+
+	void update(float elapsed_time);
+	float get_velocity() const;
+
+private:
+	float _velocity;	/* (-): left, (+): right */
+	float _max_velocity;
 };

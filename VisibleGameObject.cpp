@@ -35,9 +35,31 @@ void VisibleGameObject::draw(sf::RenderWindow & window)
 		window.draw(_sprite);
 }
 
+void VisibleGameObject::update(float elapsed_time)
+{
+}
+
 /* Sets x and y position of this object's sprite */
 void VisibleGameObject::set_position(int x, int y)
 {
 	if (_is_loaded)
 		_sprite.setPosition(x, y);
+}
+
+sf::Vector2f VisibleGameObject::get_position() const
+{
+	if (_is_loaded)
+		return _sprite.getPosition();
+	else
+		return sf::Vector2f();
+}
+
+bool VisibleGameObject::is_loaded() const
+{
+	return _is_loaded;
+}
+
+sf::Sprite & VisibleGameObject::get_sprite()
+{
+	return _sprite;
 }
