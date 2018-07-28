@@ -59,7 +59,7 @@ bool VisibleGameObject::is_loaded() const
 	return _is_loaded;
 }
 
-sf::Sprite & VisibleGameObject::get_sprite()
+sf::Sprite& VisibleGameObject::get_sprite()
 {
 	return _sprite;
 }

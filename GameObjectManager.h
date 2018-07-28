@@ -14,6 +14,7 @@ public:
 	void remove(std::string name);						/* Removes game object from manager */
 	int size() const;									/* Returns number of objects in manager */
 	VisibleGameObject * get(std::string name);			/* Gets game object by name */
+	void update_all(float elapsed_time);				/* Updates parameters of all game objects */
 	void draw_all(sf::RenderWindow &window);			/* Draws all game objects to render window */
 
 private:

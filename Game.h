@@ -11,6 +11,11 @@ class Game {
 public:
 	static void start();
 
+	/* Parameters */
+	static int WINDOW_WIDTH;
+	static int WINDOW_HEIGHT;
+	static int WINDOW_BPP;		/* Bits per pixel */
+
 private:
 	/* Game states */
 	enum GameState {
@@ -29,6 +34,7 @@ private:
 	 */
 	static GameState _state;
 	static sf::RenderWindow _main_window;
+	static sf::Clock _clock;
 	static GameObjectManager _obj_manager;
 
 	/* Static member functions:
@@ -39,7 +45,6 @@ private:
 	static void game_loop();
 	static void show_splash_screen();
 	static void show_main_menu();
-
 };
 
 /* Note: all members are static, essentially turns class into a namespace */

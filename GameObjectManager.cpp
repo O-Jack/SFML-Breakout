@@ -49,10 +49,17 @@ VisibleGameObject * GameObjectManager::get(std::string name)
 		return NULL;
 }
 
+void GameObjectManager::update_all(float elapsed_time)
+{
+	for (auto it = _game_objects.begin(); it != _game_objects.end(); it++) {
+		it->second->update(elapsed_time);
+	}
+}
+
 /* Draw all game objects currently stored in manager to given window */
 void GameObjectManager::draw_all(sf::RenderWindow & window)
 {
 	for (auto it = _game_objects.begin(); it != _game_objects.end(); it++) {
-		window.draw(it->second->draw(window));
+		it->second->draw(window);
 	}
 }
