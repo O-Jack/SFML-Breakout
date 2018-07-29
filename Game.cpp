@@ -4,12 +4,14 @@
 /* Manually instantiate and initialize static member variables outside of class */
 Game::GameState Game::_state = UNINITIALIZED;
 sf::RenderWindow Game::_main_window;
-sf::Clock Game::_clock;							/* Tracks time between drawing of frames */
+//sf::Clock Game::_clock;							/* Tracks time between drawing of frames */
 GameObjectManager Game::_obj_manager;
+Logger Game::_logger;							/* Prints messages pertaining to game to console */
 
-int Game::WINDOW_WIDTH = 1024;
-int Game::WINDOW_HEIGHT = 768;
-int Game::WINDOW_BPP = 32;
+const int Game::WINDOW_WIDTH = 1024;
+const int Game::WINDOW_HEIGHT = 768;
+const int Game::WINDOW_BPP = 32;
+const int Game::PADDLE_Y_POS = 700;
 
 void Game::start()
 {
@@ -20,16 +22,20 @@ void Game::start()
 	/* Create main window with resolution of 1024x768 at 32bpp */
 	_main_window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BPP), "Breakout");
 
-	/* Initialize Paddle object and add it to object manager */
+	/* Initialize game objects and add them to object manager */
 	Paddle *paddle = new Paddle();
-	paddle->set_position(1024 / 2 - 45, 700);
+	paddle->set_position(WINDOW_WIDTH / 2, PADDLE_Y_POS);
 	_obj_manager.add("paddle", paddle);
+
+	Ball *ball = new Ball();
+	ball->set_position(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 15);
+	_obj_manager.add("ball", ball);
 
 	/* Start by showing splash screen  */
 	_state = SPLASHSCREEN;
 
 	/* Keep executing game loop until state is changed to EXITING */
-	_clock.restart();
+	//_clock.restart();
 	while (!is_exiting())
 		game_loop();
 
@@ -58,7 +64,7 @@ void Game::game_loop()
 			case PLAYING:
 				/* DEBUG: Clear screen with red and display it on window */
 				_main_window.clear(sf::Color(0, 0, 0, 255));
-				_obj_manager.update_all(_clock.restart().asSeconds());
+				_obj_manager.update_all();
 				_obj_manager.draw_all(_main_window);
 				_main_window.display();
 

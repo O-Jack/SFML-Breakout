@@ -2,8 +2,10 @@
 #include "stdafx.h"
 #include "SplashScreen.h"
 #include "MainMenu.h"
-#include "Paddle.h"
 #include "GameObjectManager.h"
+#include "Paddle.h"
+#include "Ball.h"
+#include "Logger.h"
 
 /* Game class for state-driven implementation of Breakout */
 
@@ -12,9 +14,13 @@ public:
 	static void start();
 
 	/* Parameters */
-	static int WINDOW_WIDTH;
-	static int WINDOW_HEIGHT;
-	static int WINDOW_BPP;		/* Bits per pixel */
+	static const int WINDOW_WIDTH;
+	static const int WINDOW_HEIGHT;
+	static const int WINDOW_BPP;		/* Bits per pixel */
+	static const int PADDLE_Y_POS;
+
+	/* Public member variables */
+	static Logger _logger;
 
 private:
 	/* Game states */

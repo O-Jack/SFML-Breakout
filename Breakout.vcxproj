@@ -156,6 +156,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="MainMenu.h" />
@@ -166,9 +168,11 @@
     <ClInclude Include="VisibleGameObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Breakout.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="SplashScreen.cpp" />

@@ -14,10 +14,14 @@ public:
 
 	virtual void load(std::string filename);
 	virtual void draw(sf::RenderWindow &window);
-	virtual void update(float elapsed_time);
+	virtual void update();
 
+	/* Setters and Getters */
 	virtual void set_position(int x, int y);
+
 	virtual sf::Vector2f get_position() const;
+	virtual float get_width() const;
+	virtual float get_height() const;
 	virtual bool is_loaded() const;
 
 protected:
