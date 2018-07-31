@@ -10,7 +10,7 @@ public:
 	Paddle();
 	~Paddle();
 
-	void update();
+	void update(float elapsed_time);
 	float get_velocity() const;
 
 private:

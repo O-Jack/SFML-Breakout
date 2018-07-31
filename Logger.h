@@ -1,13 +1,16 @@
 #pragma once
 #include "stdafx.h"
 
+/* Logger class for printing game events to console; to be used like an output stream */
+
 class Logger {
 public:
-	Logger();
+	Logger(std::ostream *init);
 	~Logger();
 
-	void write(std::string msg);
+	template <typename T>
+	Logger& operator<<(T const &value);
 
 private:
-
+	std::ostream *_out_stream;
 };

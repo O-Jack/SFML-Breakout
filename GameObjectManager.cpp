@@ -50,10 +50,10 @@ VisibleGameObject * GameObjectManager::get(std::string name)
 }
 
 /* Update all game objects */
-void GameObjectManager::update_all()
+void GameObjectManager::update_all(float elapsed_time)
 {
 	for (auto it = _game_objects.begin(); it != _game_objects.end(); it++) {
-		it->second->update();
+		it->second->update(elapsed_time);
 	}
 }
 

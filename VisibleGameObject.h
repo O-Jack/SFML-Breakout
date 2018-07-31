@@ -14,7 +14,7 @@ public:
 
 	virtual void load(std::string filename);
 	virtual void draw(sf::RenderWindow &window);
-	virtual void update();
+	virtual void update(float elapsed_time);
 
 	/* Setters and Getters */
 	virtual void set_position(int x, int y);

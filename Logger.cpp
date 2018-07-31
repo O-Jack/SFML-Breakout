@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Logger.h"
 
-Logger::Logger()
+Logger::Logger(std::ostream *init) :
+	_out_stream(init)
 {
 }
 
@@ -9,7 +10,9 @@ Logger::~Logger()
 {
 }
 
-void Logger::write(std::string msg)
+template<typename T>
+Logger & Logger::operator<<(T const & value)
 {
-	std::cout << msg << std::endl;
+	if (_out_stream)
+		*_out_stream << value;
 }

@@ -6,7 +6,7 @@ public:
 	Ball();
 	virtual ~Ball();
 
-	void update();
+	void update(float elapsed_time);
 
 private:
 	float _velocity_x;

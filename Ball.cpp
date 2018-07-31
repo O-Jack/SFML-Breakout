@@ -3,8 +3,8 @@
 #include "Game.h"
 
 Ball::Ball() :
-	_velocity_x(-3),
-	_velocity_y(-3)
+	_velocity_x(-200.0),
+	_velocity_y(-200.0)
 {
 	/* Load ball sprite and set origin to center */
 	load("Images/ball-basic.png");
@@ -17,7 +17,7 @@ Ball::~Ball()
 {
 }
 
-void Ball::update()
+void Ball::update(float elapsed_time)
 {
 	/* Bounce by reversing velocity if ball collides with a wall */
 	sf::Vector2f ball_pos = get_position();
@@ -26,5 +26,5 @@ void Ball::update()
 	if (ball_pos.x - get_width() / 2 < 0.0 || ball_pos.x + get_width() / 2 > Game::WINDOW_WIDTH)
 		_velocity_x = -_velocity_x;
 
-	get_sprite().move(_velocity_x, _velocity_y);
+	get_sprite().move(_velocity_x * elapsed_time, _velocity_y * elapsed_time);
 }

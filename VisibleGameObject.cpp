@@ -35,8 +35,10 @@ void VisibleGameObject::draw(sf::RenderWindow & window)
 		window.draw(_sprite);
 }
 
-/* Dependent on the object */
-void VisibleGameObject::update()
+/* Dependent on the object, pass time elapsed since object was last drawn so change occurs with respect to time
+ * instead of with respect to CPU clock cycles (non-constant across machines)
+ */
+void VisibleGameObject::update(float elapsed_time)
 {
 }
 

@@ -4,9 +4,9 @@
 /* Manually instantiate and initialize static member variables outside of class */
 Game::GameState Game::_state = UNINITIALIZED;
 sf::RenderWindow Game::_main_window;
-//sf::Clock Game::_clock;							/* Tracks time between drawing of frames */
+sf::Clock Game::_clock;							/* Tracks time between drawing of frames */
 GameObjectManager Game::_obj_manager;
-Logger Game::_logger;							/* Prints messages pertaining to game to console */
+//Logger Game::_logger(&std::cout);				/* Prints messages pertaining to game to console */
 
 const int Game::WINDOW_WIDTH = 1024;
 const int Game::WINDOW_HEIGHT = 768;
@@ -35,7 +35,7 @@ void Game::start()
 	_state = SPLASHSCREEN;
 
 	/* Keep executing game loop until state is changed to EXITING */
-	//_clock.restart();
+	_clock.restart();
 	while (!is_exiting())
 		game_loop();
 
@@ -51,34 +51,34 @@ void Game::game_loop()
 {
 	sf::Event curr_event;
 
-	/* Keep popping from event queue and processing while there are still events on the queue */
-	while (_main_window.pollEvent(curr_event)) {
-		/* Handle event based on what the current state of the game is */
-		switch (_state) {
-			case SPLASHSCREEN:
-				show_splash_screen();
-				break;
-			case MENU:
-				show_main_menu();
-				break;
-			case PLAYING:
-				/* DEBUG: Clear screen with red and display it on window */
-				_main_window.clear(sf::Color(0, 0, 0, 255));
-				_obj_manager.update_all();
-				_obj_manager.draw_all(_main_window);
-				_main_window.display();
+	/* Pop event from event queue (curr_event will be default if event queue is empty) */
+	_main_window.pollEvent(curr_event);
 
-				/* If window is closed (Closed event), switch to EXITING state */
-				if (curr_event.type == sf::Event::Closed)
-					_state = EXITING;
+	/* Handle event based on what the current state of the game is */
+	switch (_state) {
+		case SPLASHSCREEN:
+			show_splash_screen();
+			break;
+		case MENU:
+			show_main_menu();
+			break;
+		case PLAYING:
+			/* DEBUG: Clear screen with red and display it on window */
+			_main_window.clear(sf::Color(0, 0, 0, 255));
+			_obj_manager.update_all(_clock.restart().asSeconds());		/* Pass time since clock was last restarted (in last loop iteration) */
+			_obj_manager.draw_all(_main_window);
+			_main_window.display();
+
+			/* If window is closed (Closed event), switch to EXITING state */
+			if (curr_event.type == sf::Event::Closed)
+				_state = EXITING;
 				
-				/* If P key pressed, transition to MENU state */
-				if (curr_event.type == sf::Event::KeyPressed)
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
-						_state = MENU;
+			/* If P key pressed, transition to MENU state */
+			if (curr_event.type == sf::Event::KeyPressed)
+				if (curr_event.key.code == sf::Keyboard::P)
+					_state = MENU;
 
-				break;
-		}
+			break;
 	}
 }
 
