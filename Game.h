@@ -21,6 +21,7 @@ public:
 
 	/* Public member variables */
 	static Logger _logger;
+	static GameObjectManager _obj_manager;
 
 private:
 	/* Game states */
@@ -41,7 +42,6 @@ private:
 	static GameState _state;
 	static sf::RenderWindow _main_window;
 	static sf::Clock _clock;
-	static GameObjectManager _obj_manager;
 
 	/* Static member functions:
 	 * Class functions, do not depend on instances (no this pointer, access using scope resolution).

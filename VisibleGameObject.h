@@ -23,6 +23,7 @@ public:
 	virtual float get_width() const;
 	virtual float get_height() const;
 	virtual bool is_loaded() const;
+	virtual sf::FloatRect get_global_rect() const;
 
 protected:
 	sf::Sprite& get_sprite();

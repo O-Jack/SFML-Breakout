@@ -78,6 +78,11 @@ bool VisibleGameObject::is_loaded() const
 	return _is_loaded;
 }
 
+sf::FloatRect VisibleGameObject::get_global_rect() const
+{
+	return _sprite.getGlobalBounds();
+}
+
 sf::Sprite& VisibleGameObject::get_sprite()
 {
 	return _sprite;
