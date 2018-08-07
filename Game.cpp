@@ -23,13 +23,15 @@ void Game::start()
 	_main_window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_BPP), "Breakout");
 
 	/* Initialize game objects and add them to object manager */
-	Paddle *paddle = new Paddle();
+	Paddle *paddle = new Paddle("paddle");
 	paddle->set_position(WINDOW_WIDTH / 2, PADDLE_Y_POS);
-	_obj_manager.add("paddle", paddle);
+	paddle->get_sprite().setColor(sf::Color::Cyan);
+	_obj_manager.add(paddle->get_id(), paddle);
 
-	Ball *ball = new Ball();
+	Ball *ball = new Ball("ball");
 	ball->set_position(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 15);
-	_obj_manager.add("ball", ball);
+	ball->get_sprite().setColor(sf::Color::Red);
+	_obj_manager.add(ball->get_id(), ball);
 
 	/* Start by showing splash screen  */
 	_state = SPLASHSCREEN;
@@ -40,6 +42,16 @@ void Game::start()
 		game_loop();
 
 	_main_window.close();
+}
+
+GameObjectManager & Game::get_obj_manager()
+{
+	return _obj_manager;
+}
+
+Logger & Game::get_logger()
+{
+	return _logger;
 }
 
 bool Game::is_exiting()
@@ -107,4 +119,15 @@ void Game::show_main_menu()
 			_state = EXITING;
 			break;
 	}
+}
+
+/* Creates Block objects and adds them to object manager */
+void Game::create_blocks()
+{
+	/* Create first row of blocks */
+
+	/* Create second row of blocks */
+
+	/* Create third row of blocks */
+
 }

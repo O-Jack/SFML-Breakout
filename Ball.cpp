@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "Ball.h"
-#include "Game.h"
-#include "Utility.h"
 
-Ball::Ball() :
+Ball::Ball(std::string obj_id = "") :
 	/*_velocity_x(-200.0),
 	_velocity_y(-200.0)*/
+	VisibleGameObject(obj_id),
 	_velocity(230.0),
 	_elapsed_time_since_start(0)
 {
@@ -72,16 +71,14 @@ void Ball::update(float elapsed_time) {
 		delta_pos_x *= -1;
 	}
 
-	/* Handle collision logic with paddle (check intersection of sprites in window-space coordinates) */
-	
-	/* Dynamic cast casts given object into type specified by template parameter, returns NULL if conversion is not possible.
-	 * Since object manager returns VisibleGameObject pointer, would need to cast into Paddle pointer if we wanted to call any
-	 * derived methods specific to Paddle.
-	 */
-	Paddle *paddle = dynamic_cast<Paddle *>(Game::_obj_manager.get("paddle"));
-	if (get_global_rect().intersects(paddle->get_global_rect())) {
-		_angle = 360.0 - _angle;
-		delta_pos_y *= -1;
+	/* Handle collision logic with other game objects (paddle and blocks) */
+	GameObjectManager& obj_manager = Game::get_obj_manager();
+	for (auto it = obj_manager.begin(); it != obj_manager.end(); it++) {
+		VisibleGameObject *curr = it->second;
+		if (curr->get_id() != this->get_id() && get_global_rect().intersects(curr->get_global_rect())) {
+			_angle = 360.0 - _angle;
+			delta_pos_y *= -1;
+		}
 	}
 
 	get_sprite().move(delta_pos_x, delta_pos_y);

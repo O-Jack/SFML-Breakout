@@ -1,9 +1,11 @@
 #pragma once
 #include "VisibleGameObject.h"
+#include "Game.h"
+#include "Utility.h"
 
 class Ball : public VisibleGameObject {
 public:
-	Ball();
+	Ball(std::string obj_id);
 	virtual ~Ball();
 
 	void update(float elapsed_time);

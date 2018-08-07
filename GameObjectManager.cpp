@@ -64,3 +64,13 @@ void GameObjectManager::draw_all(sf::RenderWindow & window)
 		it->second->draw(window);
 	}
 }
+
+std::unordered_map<std::string, VisibleGameObject*>::iterator GameObjectManager::begin()
+{
+	return _game_objects.begin();
+}
+
+std::unordered_map<std::string, VisibleGameObject*>::iterator GameObjectManager::end()
+{
+	return _game_objects.end();
+}

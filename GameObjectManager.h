@@ -17,6 +17,10 @@ public:
 	void update_all(float elapsed_time);				/* Updates parameters of all game objects */
 	void draw_all(sf::RenderWindow &window);			/* Draws all game objects to render window */
 
+	/* Iteration */
+	std::unordered_map<std::string, VisibleGameObject *>::iterator begin();
+	std::unordered_map<std::string, VisibleGameObject *>::iterator end();
+
 private:
 	/* Map containing pointers to game objects, keyed by object name */
 	std::unordered_map<std::string, VisibleGameObject *> _game_objects;

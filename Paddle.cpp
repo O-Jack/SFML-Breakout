@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Paddle.h"
-#include "Game.h"
 
-Paddle::Paddle() :
+Paddle::Paddle(std::string obj_id = "") :
+	VisibleGameObject(obj_id),
 	_velocity(0),
 	_max_velocity(600)
 {
@@ -11,9 +11,7 @@ Paddle::Paddle() :
 	assert(is_loaded());
 	
 	/* Set origin (center) of paddle to be the center of its sprite */
-	float sprite_width = get_sprite().getGlobalBounds().width;
-	float sprite_height = get_sprite().getGlobalBounds().height;
-	get_sprite().setOrigin(sprite_width / 2, sprite_height / 2);
+	get_sprite().setOrigin(get_width() / 2, get_height() / 2);
 
 }
 

@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "VisibleGameObject.h"
 
-/* Sets _is_loaded to false */
-VisibleGameObject::VisibleGameObject() :
+VisibleGameObject::VisibleGameObject(std::string obj_id="") :
+	_id(obj_id),
 	_is_loaded(false)
 {
 	/* None */
@@ -42,11 +42,21 @@ void VisibleGameObject::update(float elapsed_time)
 {
 }
 
+void VisibleGameObject::set_id(std::string obj_id)
+{
+	_id = obj_id;
+}
+
 /* Sets x and y position of this object's sprite */
 void VisibleGameObject::set_position(int x, int y)
 {
 	if (_is_loaded)
 		_sprite.setPosition(x, y);
+}
+
+std::string VisibleGameObject::get_id() const
+{
+	return _id;
 }
 
 sf::Vector2f VisibleGameObject::get_position() const
@@ -83,7 +93,7 @@ sf::FloatRect VisibleGameObject::get_global_rect() const
 	return _sprite.getGlobalBounds();
 }
 
-sf::Sprite& VisibleGameObject::get_sprite()
+sf::Sprite& VisibleGameObject::get_sprite() const
 {
 	return _sprite;
 }
