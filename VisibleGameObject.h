@@ -4,6 +4,11 @@
 /* Base class for game objects that need to be drawn to the screen (ie: paddle, ball) */
 class VisibleGameObject {
 public:
+	enum ObjectStatus {
+		ACTIVE,
+		INACTIVE
+	};
+
 	VisibleGameObject(std::string obj_id);
 
 	/* Virtual functions: signals to compiler to look in derived classes for
@@ -19,6 +24,7 @@ public:
 	/* Setters and Getters */
 	virtual void set_id(std::string obj_id);
 	virtual void set_position(int x, int y);
+	virtual void set_status(ObjectStatus new_status);
 
 	virtual std::string get_id() const;
 	virtual sf::Vector2f get_position() const;
@@ -26,7 +32,8 @@ public:
 	virtual float get_height() const;
 	virtual bool is_loaded() const;
 	virtual sf::FloatRect get_global_rect() const;
-	virtual sf::Sprite& get_sprite() const;
+	virtual sf::Sprite& get_sprite();
+	virtual ObjectStatus get_status() const;
 
 private:
 	std::string _id;
@@ -34,4 +41,5 @@ private:
 	sf::Sprite _sprite;
 	std::string _filename;
 	bool _is_loaded;
+	ObjectStatus _status;
 };

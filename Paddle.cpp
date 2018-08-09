@@ -29,14 +29,12 @@ void Paddle::update(float elapsed_time)
 		!sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		_velocity -= 10.0;
-		//Game::_logger << "Left key pressed.\n";
 		std::cout << "Left key pressed (pos = " << paddle_pos.x << ", velocity = " << _velocity << ")\n";
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) &&
 			 !sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		_velocity += 10.0;
-		//Game::_logger << "Right key pressed.\n";
 		std::cout << "Right key pressed (pos = " << paddle_pos.x << ", velocity = " << _velocity << ")\n";
 	}
 	

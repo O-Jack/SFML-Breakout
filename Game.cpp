@@ -6,7 +6,6 @@ Game::GameState Game::_state = UNINITIALIZED;
 sf::RenderWindow Game::_main_window;
 sf::Clock Game::_clock;							/* Tracks time between drawing of frames */
 GameObjectManager Game::_obj_manager;
-//Logger Game::_logger(&std::cout);				/* Prints messages pertaining to game to console */
 
 const int Game::WINDOW_WIDTH = 1024;
 const int Game::WINDOW_HEIGHT = 768;
@@ -33,6 +32,8 @@ void Game::start()
 	ball->get_sprite().setColor(sf::Color::Red);
 	_obj_manager.add(ball->get_id(), ball);
 
+	create_blocks();
+
 	/* Start by showing splash screen  */
 	_state = SPLASHSCREEN;
 
@@ -47,11 +48,6 @@ void Game::start()
 GameObjectManager & Game::get_obj_manager()
 {
 	return _obj_manager;
-}
-
-Logger & Game::get_logger()
-{
-	return _logger;
 }
 
 bool Game::is_exiting()
@@ -124,10 +120,33 @@ void Game::show_main_menu()
 /* Creates Block objects and adds them to object manager */
 void Game::create_blocks()
 {
-	/* Create first row of blocks */
+	/* Create first row of blocks (8 blocks per row) */
+	for (int i = 0; i < 8; i++) {
+		std::string block_name = "block_1-" + std::to_string(i + 1);
+
+		Block *new_block = new Block(sf::Color::Red, block_name);
+		new_block->set_position(i * new_block->get_width(), 60);
+
+		_obj_manager.add(block_name, new_block);
+	}
 
 	/* Create second row of blocks */
+	for (int i = 0; i < 8; i++) {
+		std::string block_name = "block_2-" + std::to_string(i + 1);
+
+		Block *new_block = new Block(sf::Color::Blue, block_name);
+		new_block->set_position(i * new_block->get_width(), 60 + new_block->get_height());
+
+		_obj_manager.add(block_name, new_block);
+	}
 
 	/* Create third row of blocks */
+	for (int i = 0; i < 8; i++) {
+		std::string block_name = "block_3-" + std::to_string(i + 1);
 
+		Block *new_block = new Block(sf::Color::Green, block_name);
+		new_block->set_position(i * new_block->get_width(), 60 + 2 * new_block->get_height());
+
+		_obj_manager.add(block_name, new_block);
+	}
 }

@@ -49,11 +49,23 @@ VisibleGameObject * GameObjectManager::get(std::string name)
 		return NULL;
 }
 
-/* Update all game objects */
+/* Update all game objects, and remove any inactive ones */
 void GameObjectManager::update_all(float elapsed_time)
 {
 	for (auto it = _game_objects.begin(); it != _game_objects.end(); it++) {
 		it->second->update(elapsed_time);
+	}
+
+	auto it = _game_objects.begin();
+	auto temp = _game_objects.begin();
+	while (it != _game_objects.end()) {
+		if (it->second->get_status() == VisibleGameObject::INACTIVE) {
+			temp = it;
+			it++;
+			remove(temp->second->get_id());
+		}
+		else
+			it++;
 	}
 }
 

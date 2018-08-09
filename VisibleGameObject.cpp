@@ -3,7 +3,8 @@
 
 VisibleGameObject::VisibleGameObject(std::string obj_id="") :
 	_id(obj_id),
-	_is_loaded(false)
+	_is_loaded(false),
+	_status(ACTIVE)
 {
 	/* None */
 }
@@ -54,6 +55,11 @@ void VisibleGameObject::set_position(int x, int y)
 		_sprite.setPosition(x, y);
 }
 
+void VisibleGameObject::set_status(ObjectStatus new_status)
+{
+	_status = new_status;
+}
+
 std::string VisibleGameObject::get_id() const
 {
 	return _id;
@@ -93,7 +99,12 @@ sf::FloatRect VisibleGameObject::get_global_rect() const
 	return _sprite.getGlobalBounds();
 }
 
-sf::Sprite& VisibleGameObject::get_sprite() const
+sf::Sprite& VisibleGameObject::get_sprite()
 {
 	return _sprite;
+}
+
+VisibleGameObject::ObjectStatus VisibleGameObject::get_status() const
+{
+	return _status;
 }

@@ -22,7 +22,6 @@ public:
 
 	/* Getters, must be declared static to access static member variables */
 	static GameObjectManager& get_obj_manager();
-	static Logger& get_logger();
 	
 
 private:
@@ -44,7 +43,6 @@ private:
 	static GameState _state;
 	static sf::RenderWindow _main_window;
 	static sf::Clock _clock;
-	static Logger _logger;
 	static GameObjectManager _obj_manager;
 
 	/* Static member functions:
