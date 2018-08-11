@@ -5,7 +5,7 @@ Ball::Ball(std::string obj_id = "") :
 	/*_velocity_x(-200.0),
 	_velocity_y(-200.0)*/
 	VisibleGameObject(obj_id),
-	_velocity(230.0),
+	_velocity(300.0),
 	_elapsed_time_since_start(0)
 {
 	/* Load ball sprite and set origin to center */
@@ -73,12 +73,28 @@ void Ball::update(float elapsed_time) {
 
 	/* Handle collision logic with other game objects (paddle and blocks) */
 	GameObjectManager& obj_manager = Game::get_obj_manager();
+	VisibleGameObject *curr;
+	sf::FloatRect next_rect;
 	for (auto it = obj_manager.begin(); it != obj_manager.end(); it++) {
-		VisibleGameObject *curr = it->second;
-		if (curr->get_id() != this->get_id() && get_global_rect().intersects(curr->get_global_rect())) {
-			_angle = 360.0 - _angle;
-			delta_pos_y *= -1;
-		}
+		/* Get current object */
+		curr = it->second;
+		
+		/* Only do collision check if current object is not ball */
+		if (curr->get_id() != this->get_id()) {
+			/* Calculate bounding rectangle of next position; if intersects with ball, make ball bounce */
+			next_rect = get_global_bound();
+			next_rect.top += delta_pos_y;
+			next_rect.left += delta_pos_x;
+
+			if (next_rect.intersects(curr->get_global_bound())) {
+				_angle = 360.0 - _angle;
+				delta_pos_y *= -1;
+
+				/* If current object is a Block, mark block for removal */
+				if (curr->get_id() != "paddle")
+					curr->set_status(VisibleGameObject::INACTIVE);
+			}
+		}		
 	}
 
 	get_sprite().move(delta_pos_x, delta_pos_y);

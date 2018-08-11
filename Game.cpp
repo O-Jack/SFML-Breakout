@@ -74,6 +74,7 @@ void Game::game_loop()
 			/* DEBUG: Clear screen with red and display it on window */
 			_main_window.clear(sf::Color(0, 0, 0, 255));
 			_obj_manager.update_all(_clock.restart().asSeconds());		/* Pass time since clock was last restarted (in last loop iteration) */
+			_obj_manager.remove_inactive();
 			_obj_manager.draw_all(_main_window);
 			_main_window.display();
 
@@ -125,7 +126,7 @@ void Game::create_blocks()
 		std::string block_name = "block_1-" + std::to_string(i + 1);
 
 		Block *new_block = new Block(sf::Color::Red, block_name);
-		new_block->set_position(i * new_block->get_width(), 60);
+		new_block->set_position(new_block->get_width()/2 + i * new_block->get_width(), 60);
 
 		_obj_manager.add(block_name, new_block);
 	}
@@ -135,7 +136,7 @@ void Game::create_blocks()
 		std::string block_name = "block_2-" + std::to_string(i + 1);
 
 		Block *new_block = new Block(sf::Color::Blue, block_name);
-		new_block->set_position(i * new_block->get_width(), 60 + new_block->get_height());
+		new_block->set_position(new_block->get_width()/2 + i * new_block->get_width(), 60 + new_block->get_height());
 
 		_obj_manager.add(block_name, new_block);
 	}
@@ -145,7 +146,7 @@ void Game::create_blocks()
 		std::string block_name = "block_3-" + std::to_string(i + 1);
 
 		Block *new_block = new Block(sf::Color::Green, block_name);
-		new_block->set_position(i * new_block->get_width(), 60 + 2 * new_block->get_height());
+		new_block->set_position(new_block->get_width()/2 + i * new_block->get_width(), 60 + 2 * new_block->get_height());
 
 		_obj_manager.add(block_name, new_block);
 	}

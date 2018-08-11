@@ -1,0 +1,4 @@
+Ball can clip into Paddle from the side and will bounce up and down until Paddle is
+moved out of the way.
+
+Collision on the left and right of paddle / blocks are a little wonky.
